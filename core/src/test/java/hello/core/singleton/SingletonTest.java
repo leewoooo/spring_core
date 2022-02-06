@@ -1,9 +1,14 @@
 package hello.core.singleton;
 
 import hello.core.AppConfig;
+import hello.core.member.MemberRepository;
 import hello.core.member.MemberService;
+import hello.core.member.MemberServiceImpl;
+import hello.core.order.OrderServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,5 +31,44 @@ public class SingletonTest {
 
         // memberService1 != memberService2
         assertThat(memberService1).isNotSameAs(memberService2);
+    }
+
+    @Test
+    @DisplayName("스프링 컨테이너와 싱글톤")
+    void springContainer() {
+        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+
+        MemberService memberService1 = ac.getBean(MemberService.class);
+        MemberService memberService2 = ac.getBean(MemberService.class);
+
+        System.out.println("memberService1 = " + memberService1);
+        System.out.println("memberService2 = " + memberService2);
+
+        assertThat(memberService1).isSameAs(memberService2);
+    }
+
+    @Test
+    void configurationTest(){
+        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+
+        MemberServiceImpl memberService = ac.getBean("memberService", MemberServiceImpl.class);
+        OrderServiceImpl orderService = ac.getBean("orderService", OrderServiceImpl.class);
+        MemberRepository memberRepository = ac.getBean("memberRepository", MemberRepository.class);
+
+        System.out.println("memberRepository = " + memberRepository);
+        System.out.println("orderService = " + orderService.getMemberRepository());
+        System.out.println("memberService = " + memberService.getMemberRepository());
+
+        assertThat(memberRepository).isSameAs(memberService.getMemberRepository());
+        assertThat(memberRepository).isSameAs(orderService.getMemberRepository());
+    }
+
+    @Test
+    void configurationDeep(){
+        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+
+        AppConfig bean = ac.getBean(AppConfig.class);
+
+        System.out.println("bean.getClass() = " + bean.getClass());
     }
 }
