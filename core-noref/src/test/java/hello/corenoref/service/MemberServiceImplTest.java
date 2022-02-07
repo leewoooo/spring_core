@@ -2,6 +2,8 @@ package hello.corenoref.service;
 
 import hello.corenoref.member.Grade;
 import hello.corenoref.member.Member;
+import hello.corenoref.service.member.MemberService;
+import hello.corenoref.service.member.MemberServiceImpl;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

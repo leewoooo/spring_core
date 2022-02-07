@@ -1,4 +1,4 @@
-package hello.corenoref.service;
+package hello.corenoref.service.order;
 
 import hello.corenoref.member.Member;
 import hello.corenoref.order.Order;

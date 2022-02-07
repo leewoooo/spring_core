@@ -1,4 +1,4 @@
-package hello.corenoref.service;
+package hello.corenoref.service.member;
 
 import hello.corenoref.member.Member;
 
