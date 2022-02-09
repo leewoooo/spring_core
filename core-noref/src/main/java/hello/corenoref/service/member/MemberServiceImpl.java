@@ -2,7 +2,10 @@ package hello.corenoref.service.member;
 
 import hello.corenoref.member.Member;
 import hello.corenoref.repository.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MemberServiceImpl implements MemberService {
 
     // MemberService가 DIP를 위반하고 있다. 추상화에 의존하는 것이 아닌 구현체를 직접 의존하고 있다.
@@ -12,6 +15,7 @@ public class MemberServiceImpl implements MemberService {
     // interface에만 의존을 하고 구현 클래스는 외부에서 주입을 받음으로 DIP를 지킬 수 있다.
     private final MemberRepository memberRepository;
 
+    @Autowired
     public MemberServiceImpl(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }

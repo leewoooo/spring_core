@@ -4,7 +4,10 @@ import hello.corenoref.member.Member;
 import hello.corenoref.order.Order;
 import hello.corenoref.repository.MemberRepository;
 import hello.corenoref.service.discount.DiscountPolicy;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class OrderServiceImpl implements OrderService{
 
     // OrderService 또한 MemberService처럼 memberRepository와 discountPolicy를 직접 의존하고 있음 DIP 위반
@@ -18,6 +21,7 @@ public class OrderServiceImpl implements OrderService{
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;

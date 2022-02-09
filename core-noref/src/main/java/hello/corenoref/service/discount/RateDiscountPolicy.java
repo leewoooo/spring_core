@@ -2,7 +2,9 @@ package hello.corenoref.service.discount;
 
 import hello.corenoref.member.Grade;
 import hello.corenoref.member.Member;
+import org.springframework.stereotype.Component;
 
+@Component
 public class RateDiscountPolicy implements DiscountPolicy {
 
     private final int RATE_DISCOUNT_PERCENT = 10;
